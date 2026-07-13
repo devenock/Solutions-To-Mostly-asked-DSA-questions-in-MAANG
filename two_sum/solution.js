@@ -78,3 +78,19 @@ function twoSumSol2(nums, target) {
 
 
 // 3.OPTIMIZED SOLUTION: Hash Table => 0(n)
+function twoSumHashMap(nums, target) {
+  // create a new map
+  const numMap = new Map()
+  // loop through nums
+  for (let i = 0; i < nums.length; i++){
+    // set complement(what we need to add to nums[i] to get the target)
+    let complement = target - nums[i]
+    // check if complement already exist in the map and return an array with the complement index and i
+    if (numMap.has(complement)) {
+      return [numMap.get(complement), i]
+    }
+    // if complement does not exist in the map, we add the current number and its index to the hash map
+    numMap.set(nums[i], i)
+  }
+  return [-1, -1]
+}
