@@ -130,3 +130,24 @@ function productExceptSelf(nums) {
 // return that res array
   return res
 }
+
+// OR
+function productExceptSelf(nums) {
+  let n = nums.length
+  let resArr = new Array(n)
+
+  let leftProduct = 1
+  let rightProduct = 1
+
+  for (let i = 0; i < n; i++){
+    resArr[i] = leftProduct
+    leftProduct *= nums[i]
+  }
+
+  for (let i = n -1; i >= 0; i--){
+    resArr[i] *= rightProduct
+    rightProduct *= nums[i]
+  }
+
+  return resArr;
+}
