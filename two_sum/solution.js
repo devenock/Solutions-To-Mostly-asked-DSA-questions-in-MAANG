@@ -77,7 +77,7 @@ function twoSumSol2(nums, target) {
 }
 
 
-// 3.OPTIMIZED SOLUTION: Hash Table => 0(n)
+// 3.OPTIMIZED SOLUTION: Hash Map => 0(n)
 function twoSumHashMap(nums, target) {
   // create a new map
   const numMap = new Map()
