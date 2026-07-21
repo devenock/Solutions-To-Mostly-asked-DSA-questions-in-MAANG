@@ -37,3 +37,47 @@ function findMedianSortedArrays(nums1, nums2) {
     return newArr[Math.floor(n / 2)]
   }
 }
+
+// OPTIMAL BINARY SEARCH SOLUTION => time: 0(log(min(n,m))), space: 0(1)
+function findMedianSortedArrays(nums1, nums2) {
+  // reassign the sorted arrays to A and B respectively
+  let A = nums1
+  let B = nums2
+
+  // get the total length of the new arrays
+  let total = A.length + B.length
+  // get the mid point
+  let half = Math.floor((total + 1) / 2)
+
+  // ensure A is the smallest or swap
+  if (B.length < A.length) {
+    [A, B] = [B, A]
+  }
+
+  // declare the pointers to perform a binary search on A
+  let left = 0
+  let right = A.length
+  while (left <= right) {
+    // get the mid
+    let mid = Math.floor((left + right) / 2)
+    // declare j(where array B starts)
+    let j = half - mid
+    // define border values
+    let ALeft = mid > 0 ? A[mid - 1] : Number.MIN_SAFE_INTEGER;
+    let ARight = mid < A.length ? A[mid] : Number.MAX_SAFE_INTEGER;
+    let BLeft = j > 0 ? B[j - 1] : Number.MIN_SAFE_INTEGER;
+    let BRight = j < B.length ? B[j] : Number.MAX_SAFE_INTEGER;
+
+    if (ALeft <= BRight && BLeft < ARight) {
+      if (total % 2 !== 0) {
+        return Math.max(ALeft, BLeft)
+      }
+      return (Math.max(ALeft, BLeft) + Math.min(ARight, BRight)) / 2
+    } else if (ALeft > BRight) {
+      right = mid - 1
+    } else {
+      left = mid + 1
+    }
+  }
+  return -1
+}
