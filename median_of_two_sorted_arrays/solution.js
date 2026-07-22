@@ -60,15 +60,15 @@ function findMedianSortedArrays(nums1, nums2) {
   while (left <= right) {
     // get the mid
     let mid = Math.floor((left + right) / 2)
-    // declare j(where array B starts)
+    // declare j as the cut(where array B starts)
     let j = half - mid
-    // define border values
+    // define border values around the cut
     let ALeft = mid > 0 ? A[mid - 1] : Number.MIN_SAFE_INTEGER;
     let ARight = mid < A.length ? A[mid] : Number.MAX_SAFE_INTEGER;
     let BLeft = j > 0 ? B[j - 1] : Number.MIN_SAFE_INTEGER;
     let BRight = j < B.length ? B[j] : Number.MAX_SAFE_INTEGER;
 
-    if (ALeft <= BRight && BLeft < ARight) {
+    if (ALeft <= BRight && BLeft <= ARight) {
       if (total % 2 !== 0) {
         return Math.max(ALeft, BLeft)
       }
